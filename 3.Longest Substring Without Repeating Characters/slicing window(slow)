@@ -1,0 +1,22 @@
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if(len(s)==0):
+            return 0
+        if(len(s)==1):
+            return 1
+        sub_max_length_list = []
+        for i in range(len(s)):
+            current_substring = s[i]
+            for j in range(i+1,len(s)):
+                if(s[j] not in current_substring):
+                    current_substring += s[j]
+                else:
+                    sub_max_length_list.append(len(current_substring))
+                    break
+                sub_max_length_list.append(len(current_substring))
+        if(sub_max_length_list):
+            return max(sub_max_length_list)
+        else:
+            return 
+                
