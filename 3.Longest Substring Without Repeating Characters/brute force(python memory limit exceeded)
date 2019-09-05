@@ -1,0 +1,40 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if(len(s)==0):
+            return 0
+        if(len(s)==1):
+            return 1
+        def possible_sub(string):
+            possible_sub_list = []
+            for i in range(len(s)):
+                for j in range(i+1,len(s)+1):
+                    possible_sub_list.append(s[i:j])
+            return possible_sub_list
+        def check_if_duplicate(a_substring):
+            alphabet_set = set()
+            for i in a_substring:
+                if i in alphabet_set:
+                    return False
+                else:
+                    alphabet_set.add(i)
+            return True
+        
+        def get_sub_list(s):
+            p_s_l = possible_sub(s)
+            substring_list = []
+            for i in p_s_l:
+                if(check_if_duplicate(i) == True):
+                    substring_list.append(i)
+            return substring_list
+        
+        possible_sub_list = get_sub_list(s)
+        def get_biggest_length(p_s_l):
+            length_list = []
+            for i in p_s_l:
+                length_list.append(len(i))
+            return length_list
+        
+        length_list = get_biggest_length(possible_sub_list)
+        
+        ans = max(length_list)
+        return ans
